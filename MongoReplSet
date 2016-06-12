@@ -1,0 +1,31 @@
+//Mongo Replica file
+
+cd /home/sailor/nodeServers/mongoServers/
+
+mkdir mongodb1
+mkdir mongodb2
+mkdir mongodb3
+
+@REM Primary
+
+start "a" mongod --dbpath ./mongodb1 --port 30000 --replSet "demo"
+
+@REM Secondary
+
+start "b" mongod --dbpath ./mongodb2 --port 40000 --replSet "demo"
+
+@REM Arbiter
+
+start "c" mongod --dbpath ./mongodb3
+ --port 50000 --replSet "demo"
+
+mongod --port 27017 --dbpath "home/sailor/nodeServers/mongoServers/mongodb1" --replSet rs0
+
+
+ var demoConfig = {_id:"demo", members:[ { _id:0, host : 'localhost: 30000', priority: 10 }, { _id:1, host : 'localhost: 40000'}, { _id:2, host : 'localhost: 50000', arbiterOnly: true }  ]  }
+
+
+ rs.instantiate(demoConfig)
+
+
+mongo localhost/admin --eval "printjson(db.runCommand({logRotate:1}))"

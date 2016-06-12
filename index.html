@@ -1,0 +1,34 @@
+<html>
+<head>
+	<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+	<script src="/socket.io/socket.io.js" type="text/javascript" charset="utf-8"></script>
+<title>Sample Page</title>
+<script>
+	var socket;
+	function onload(){
+		socket = io.connect()
+		socket.on('timer', function(data){
+			console.log('TIMER '+data)
+			document.getElementById('timer').innerHTML = data
+		})
+		socket.on('chatUpdate', function(data){
+			$('#chatWindow').append('<li>'+data+'</li>')
+
+		})
+	}
+	function submitData(){
+		var data = document.getElementById('submitData').value;
+		socket.emit('submit', data)
+		document.getElementById('submitData').value = ''
+	}
+</script>
+</head>
+<body onload="onload()">
+Hello World!
+<div id="timer"></div>
+Data: <input type="text" id="submitData" value="" placeholder=""><input type="button" onclick="submitData()" value="">
+<ul id='chatWindow'>
+	<li></li>
+</ul>
+</body>
+</html>

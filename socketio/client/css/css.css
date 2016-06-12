@@ -1,0 +1,40 @@
+
+
+.box{
+    left:10px;
+    margin:10px;
+    position: relative;
+    border:3px solid black;
+    height:100px;
+    width:200px;
+}
+
+.red{
+	background: #cc0000
+}
+
+.pink{
+	background: #ff7373
+}
+
+.purple{
+	background: #9600ff
+}
+
+.yellow{
+	background: #ffd700
+}
+
+.pearl{
+	background: #faebd7
+}
+
+.orange{
+	background: #da5c00
+}
+.green{
+	background: #009933
+}
+.blue{
+	background: #2950c5
+}
